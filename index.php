@@ -1,3 +1,9 @@
+<?php 
+session_start();
+$errors = $_SESSION['errors'] ?? [];
+$old = $_SESSION['old'] ?? [];
+unset($_SESSION['errors'],$_SESSION['old']);
+?>
 <style>
     body {
     font-family: Arial, sans-serif;
@@ -67,45 +73,95 @@
     <h2>Registration Form</h2>
 
     <label>First Name</label>
-    <input type="text" name="first_name" >
+    <input type="text" 
+    name="first_name"
+    value="<?=  $old['first_name'] ?? '' ?>"
+    style="border: <?= isset($errors['first_name']) ? "2px solid red" : "" ?>" >
+    <?php if(isset($errors['first_name'])): ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['first_name'] ?></p>
+    <?php endif; ?>
 
     <label>Last Name</label>
-    <input type="text" name="last_name" >
+    <input type="text" name="last_name"
+    value="<?=  $old['last_name'] ?? '' ?>"
+    style="border: <?= isset($errors['last_name']) ? "2px solid red" : "" ?>" > 
+    <?php if(isset($errors['last_name'])): ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['last_name'] ?></p>
+    <?php endif; ?>
 
     <label>Email</label>
-    <input type="email" name="email" >
+    <input type="text" name="email" 
+    value="<?=  $old['email'] ?? '' ?>"
+    style="border: <?= isset($errors['email']) ? "2px solid red" : "" ?>" >
+    <?php if(isset($errors['email'])){ ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['email'] ?></p>
+    <?php } ?>
 
     <label>Password</label>
-    <input type="password" name="password" >
+    <input type="password" name="password"
+    value="<?=  $old['password'] ?? '' ?>"
+    style="border: <?= isset($errors['password']) ? "2px solid red" : "" ?>" > 
+    <?php if(isset($errors['password'])){ ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['password'] ?></p>
+    <?php } ?>
 
     <label>Confirm Password</label>
-    <input type="password" name="confirm_password" >
-
+    <input type="password" name="confirm_password" 
+    value="<?=  $old['confirm_password'] ?? '' ?>"
+    style="border: <?= isset($errors['confirm_password']) ? "2px solid red" : "" ?>" >
+    <?php if(isset($errors['confirm_password'])){ ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['confirm_password'] ?></p>
+    <?php } ?>
+    
     <label>Username</label>
-    <input type="text" name="username">
-
+    <input type="text" name="username"
+    value="<?=  $old['username'] ?? '' ?>"
+    style="border: <?= isset($errors['username']) ? "2px solid red" : "" ?>" >
+    <?php if(isset($errors['username'])){ ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['username'] ?></p>
+    <?php } ?>
+    
     <label>Phone</label>
-    <input type="tel" name="phone">
+    <input type="tel" name="phone"
+    value="<?=  $old['phone'] ?? '' ?>"
+    style="border: <?= isset($errors['phone']) ? "2px solid red" : "" ?>" >
+    <?php if(isset($errors['phone'])){ ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['phone'] ?></p>
+    <?php } ?>
 
     <label>Birth Date</label>
-    <input type="date" name="birthdate">
+    <input type="date" name="birthdate"
+    value="<?=  $old['birthdate'] ?? '' ?>"
+    style="border: <?= isset($errors['birthdate']) ? "2px solid red" : "" ?>" >
+    <?php if(isset($errors['birthdate'])){ ?>
+        <p style="color:red; margin:5px 0;"><?= $errors['birthdate'] ?></p>
+    <?php } ?>
 
     <label>Gender</label>
     <select name="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
+        <option value="male" <?= ($old['gender'] ?? '') == 'male' ? 'selected' : '' ?>>Male</option>
+        <option value="female" <?= ($old['gender'] ?? '') == 'female' ? 'selected' : '' ?>>Female</option>
+        <option value="other" <?= ($old['gender'] ?? '') == 'other' ? 'selected' : '' ?>>Other</option>
     </select>
 
     <label>Address</label>
-    <textarea name="address"></textarea>
+<textarea name="address"
+    style="border: <?= isset($errors['address']) ? "2px solid red" : "" ?>">
+<?= $old['address'] ?? '' ?>
+</textarea>
 
+<?php if(isset($errors['address'])){ ?>
+    <p style="color:red; margin:5px 0;"><?= $errors['address'] ?></p>
+<?php } ?>
     <button type="submit">Register</button>
 </form>
 
 
 
 <?php
+// session_start();
+// $errors = $_SESSION['errors'] ?? [];
+// unset($_SESSION['errors']);
 //Խնդիր 1
 // $price = 12.36654;
 // $rounded = round($price,2);
